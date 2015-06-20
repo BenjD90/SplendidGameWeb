@@ -1,0 +1,138 @@
+<div class="row-fluid">
+  <div class="col-md-12">
+    <h3>Table de {{table.opener.name}} pour {{table.nbPlayerMax}} joueurs, {{table.nbPlayerMax - table.players.length}}
+      places restantes</h3>
+
+    <div style="text-align:right;">
+      <a ng-href="#/tables" class="btn btn-default navbar-btn">Quiter</a>
+    </div>
+    <div class="row">
+      <div ng-repeat="card in table.game.cards | orderBy : '-level'" class="card col-xs-3">
+        <div class="{{card.color}}" title="{{card}}" ng-click="takeCard(card)">
+
+          <div class="top">
+            <span style="float : right; margin-right: 5px;" class="diskCost {{card.color}}"></span>
+            <span ng-show="card.value > 0"><h1>{{card.value}}</h1></span>
+          </div>
+          <div ng-show="card.cost.green != null">
+            <div ng-repeat="i in getArrayOfSize(card.cost.green) track by $index"
+                 class="diskCost green"></div>
+          </div>
+
+          <div ng-show="card.cost.white != null">
+            <div ng-show="card.cost.white != null" ng-repeat="i in getArrayOfSize(card.cost.white) track by $index"
+                 class="diskCost white"></div>
+          </div>
+
+          <div ng-show="card.cost.blue != null">
+
+            <div ng-show="card.cost.blue != null" ng-repeat="i in getArrayOfSize(card.cost.blue) track by $index"
+                 class="diskCost blue"></div>
+          </div>
+
+          <div ng-show="card.cost.black != null">
+
+            <div ng-show="card.cost.black != null" ng-repeat="i in getArrayOfSize(card.cost.black) track by $index"
+                 class="diskCost black"></div>
+          </div>
+
+          <div ng-show="card.cost.red != null">
+            <div ng-show="card.cost.red != null" ng-repeat="i in getArrayOfSize(card.cost.red) track by $index"
+                 class="diskCost red"></div>
+          </div>
+
+          <div class="footer">
+            {{card.idCard}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button type="button" ng-click="getOneToken('green');" class="btn btn-default navbar-btn"
+            style="background-color: forestgreen;">Vert ({{table.game.token.green.nb}})
+    </button>
+    <button type="button" ng-click="getOneToken('white');" class="btn btn-default navbar-btn"
+            style="background-color: white;">Blanc ({{table.game.token.white.nb}})
+    </button>
+    <button type="button" ng-click="getOneToken('blue');" class="btn btn-default navbar-btn"
+            style="background-color: royalblue;">Bleu ({{table.game.token.blue.nb}})
+    </button>
+    <button type="button" ng-click="getOneToken('black');" class="btn btn-default navbar-btn"
+            style="background-color: black; color: white;">Noir ({{table.game.token.black.nb}})
+    </button>
+    <button type="button" ng-click="getOneToken('red');" class="btn btn-default navbar-btn"
+            style="background-color: red;">Rouge ({{table.game.token.red.nb}})
+    </button>
+    &nbsp;
+    <button type="button" ng-click="getOneToken('yellow');" class="btn btn-default navbar-btn"
+            style="background-color: yellow;">Jaune ({{table.game.token.yellow.nb}})
+    </button>
+    <br/>
+    <button type="button" ng-click="nextPlayer();" class="btn btn-default navbar-btn">Valider</button>
+    <button type="button" ng-click="cancelAction();" class="btn btn-default navbar-btn">Annuler</button>
+  </div>
+  <div>
+    Mes jetons : <br/>
+
+    <div>
+      <div ng-repeat="(key, token) in pickedToken" ng-show="token.nb > 0">
+        {{key}} : {{token.nb}}
+      </div>
+      <div ng-repeat="(key, token) in table.players[userIndex].token" ng-show="token.nb > 0">
+        {{key}} : {{token.nb}}
+      </div>
+    </div>
+  </div>
+  <div>
+    Mes cartes : <br/>
+
+    <div>
+      <div ng-repeat="card in table.players[userIndex].cards track by $index | orderBy : 'color'" class="card col-xs-3">
+        <div class="{{card.color}}" title="{{card}}">
+
+          <div class="top">
+            <span style="float : right; margin-right: 5px;" class="diskCost {{card.color}}"></span>
+            <span ng-show="card.value > 0"><h1>{{card.value}}</h1></span>
+          </div>
+          <div ng-show="card.cost.green != null">
+            <div ng-repeat="i in getArrayOfSize(card.cost.green) track by $index"
+                 class="diskCost green"></div>
+          </div>
+
+          <div ng-show="card.cost.white != null">
+            <div ng-show="card.cost.white != null" ng-repeat="i in getArrayOfSize(card.cost.white) track by $index"
+                 class="diskCost white"></div>
+          </div>
+
+          <div ng-show="card.cost.blue != null">
+
+            <div ng-show="card.cost.blue != null" ng-repeat="i in getArrayOfSize(card.cost.blue) track by $index"
+                 class="diskCost blue"></div>
+          </div>
+
+          <div ng-show="card.cost.black != null">
+
+            <div ng-show="card.cost.black != null" ng-repeat="i in getArrayOfSize(card.cost.black) track by $index"
+                 class="diskCost black"></div>
+          </div>
+
+          <div ng-show="card.cost.red != null">
+            <div ng-show="card.cost.red != null" ng-repeat="i in getArrayOfSize(card.cost.red) track by $index"
+                 class="diskCost red"></div>
+          </div>
+
+          <div class="footer">
+            {{card.idCard}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<p class="clearfix"></p>
+<div ng-repeat="message in messages" class="alert alert-{{message.type}}">
+
+
+</div>

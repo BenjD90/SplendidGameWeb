@@ -1,0 +1,27 @@
+<div class="row-fluid">
+  <div class="col-md-12">
+    <h3>Tables</h3>
+
+
+    <form name="tableForm" ng-submit="openTable()">
+      <input type="number" name="nbPlayer" ng-model="nbPlayer" required ng-minlength="1" ng-maxlength="1"
+             ng-pattern="/[2-5]/"/>
+      <input type="submit" value="Ouvrir une table" class="btn btn-info" ng-disabled="!tableForm.nbPlayer.$valid"/>
+    </form>
+
+    <ul id="messages" ng-show="tables.length">
+      <li ng-repeat="table in tables | reverse | notFullTables ">
+        <a ng-href="#/table/{{table.$id }}">
+          Table de {{table.opener.name}} ouverte le {{table.dateCreation | date : "dd/MM 'à' h:mma"}} places :
+          <span ng-switch on="table.players"><span ng-switch-when="undefined">{{table.nbPlayerMax}}</span><span ng-switch-default>{{table.nbPlayerMax - table.players.length}}</span></span>/{{table.nbPlayerMax}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>
+<p class="clearfix"></p>
+<div ng-repeat="message in messages" class="alert alert-{{message.type}}">
+
+
+</div>
