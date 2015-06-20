@@ -1,7 +1,6 @@
-# splendid-firebase
+# SplendidGameWeb
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 1.0.0.
+This project is a multi-player game, a mix of poker, chess and strategy games.
 
 ## Build & development
 
