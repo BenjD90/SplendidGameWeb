@@ -2,15 +2,15 @@
 
 /**
  * @ngdoc overview
- * @name splendidFirebaseApp
+ * @name splendidGameWebApp
  * @description
- * # splendidFirebaseApp
+ * # splendidGameWebApp
  *
  * Main module of the application.
  */
-angular.module('splendidFirebaseApp', [
-    'ngRoute',
-    'firebase',
-    'firebase.ref',
-    'firebase.auth'
-  ]);
+angular.module('splendidGameWebApp', [
+  'ngRoute',
+  'firebase',
+  'firebase.ref',
+  'firebase.auth'
+]);

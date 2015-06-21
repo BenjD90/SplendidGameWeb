@@ -2,7 +2,7 @@
  * Created by Benjamin on 14/06/2015.
  */
 
-angular.module('splendidFirebaseApp').constant("CST_MESSAGES", {
+angular.module('splendidGameWebApp').constant("CST_MESSAGES", {
   "quitGame": 'Vous allez quitter la partie, en êtes vous certain ?'
 }).constant("CST_PICKED_TOKEN_INITIAL", {
   green: {

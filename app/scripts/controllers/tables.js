@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name splendidFirebaseApp.controller:TablesCtrl
+ * @name splendidGameWebApp.controller:TablesCtrl
  * @description
  * # TablesCtrl
- * Controller of the splendidFirebaseApp
+ * Controller of the splendidGameWebApp
  */
-angular.module('splendidFirebaseApp')
+angular.module('splendidGameWebApp')
   .controller('TablesCtrl', function ($scope, user, Auth, Ref, $firebaseObject, $firebaseArray) {
     $scope.user = user;
     $scope.profile = $firebaseObject(Ref.child('users/' + user.uid));

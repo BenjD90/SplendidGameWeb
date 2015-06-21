@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name splendidFirebaseApp.controller:MainCtrl
+ * @name splendidGameWebApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the splendidFirebaseApp
+ * Controller of the splendidGameWebApp
  */
-angular.module('splendidFirebaseApp')
+angular.module('splendidGameWebApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

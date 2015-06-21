@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name splendidFirebaseApp.controller:TableCtrl
+ * @name splendidGameWebApp.controller:TableCtrl
  * @description
  * # TableCtrl
- * Controller of the splendidFirebaseApp
+ * Controller of the splendidGameWebApp
  */
-angular.module('splendidFirebaseApp')
+angular.module('splendidGameWebApp')
   .controller('TableCtrl', function ($scope, $routeParams, user, Auth, Ref, $firebaseObject, $location, $window, CST_MESSAGES, CST_PICKED_TOKEN_INITIAL) {
 
     initRound();

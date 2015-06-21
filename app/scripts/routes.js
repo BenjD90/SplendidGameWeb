@@ -1,7 +1,7 @@
 'use strict';
 /**
  * @ngdoc overview
- * @name splendidFirebaseApp:routes
+ * @name splendidGameWebApp:routes
  * @description
  * # routes.js
  *
@@ -27,7 +27,7 @@
  *   }
  *
  */
-angular.module('splendidFirebaseApp')
+angular.module('splendidGameWebApp')
 
 /**
  * Adds a special `whenAuthenticated` method onto $routeProvider. This special method,

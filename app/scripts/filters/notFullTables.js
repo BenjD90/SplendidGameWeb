@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('splendidFirebaseApp')
+angular.module('splendidGameWebApp')
   .filter('notFullTables', function() {
     return function(items) {
       return angular.isArray(items) ? items.filter(function (element) {

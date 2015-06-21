@@ -1,12 +1,12 @@
 'use strict';
 /**
  * @ngdoc function
- * @name splendidFirebaseApp.controller:LoginCtrl
+ * @name splendidGameWebApp.controller:LoginCtrl
  * @description
  * # LoginCtrl
  * Manages authentication to any active providers.
  */
-angular.module('splendidFirebaseApp')
+angular.module('splendidGameWebApp')
   .controller('LoginCtrl', function ($scope, Auth, $location) {
     $scope.oauthLogin = function(provider) {
       $scope.err = null;
@@ -18,7 +18,7 @@ angular.module('splendidFirebaseApp')
       Auth.$authAnonymously({rememberMe: true}).then(redirect, showError);
     };
 
-    
+
 
     function redirect() {
       $location.path('/account');

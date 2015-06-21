@@ -3,7 +3,7 @@
 describe('Controller: TableCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('splendidFirebaseApp'));
+  beforeEach(module('splendidGameWebApp'));
 
   var TableCtrl,
     scope;
