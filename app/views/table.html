@@ -69,16 +69,22 @@
             style="background-color: yellow;">Jaune ({{table.game.token.yellow.nb}})
     </button>
     <br/>
-    <button type="button" ng-click="nextPlayer()" class="btn btn-default navbar-btn">Valider</button>
+    <button type="button" ng-click="nextPlayer()" class="btn btn-default navbar-btn">Valider - next Player</button>
     <button type="button" ng-click="cancelAction()" class="btn btn-default navbar-btn">Annuler</button>
   </div>
   <div>
-    Mes jetons : <br/>
+    Dans ma main : <br/>
 
     <div>
       <div ng-repeat="(key, token) in pickedToken" ng-show="token.nb > 0">
         {{key}} : {{token.nb}}
       </div>
+    </div>
+  </div>
+  <div>
+    Mes jetons : <br/>
+
+    <div>
       <div ng-repeat="(key, token) in table.players[userIndex].token" ng-show="token.nb > 0">
         {{key}} : {{token.nb}}
       </div>

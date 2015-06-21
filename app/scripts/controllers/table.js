@@ -83,21 +83,13 @@ angular.module('splendidFirebaseApp')
       if (controlTokenPicked($scope.pickedToken, tokenName) && $scope.table.game.token[tokenName].nb > 0) {
         $scope.pickedToken[tokenName].nb++;
         $scope.table.game.token[tokenName].nb--;
-        if (!$scope.table.players[$scope.userIndex].token) {
-          $scope.table.players[$scope.userIndex].token = {
-            black: {nb: 0},
-            blue: {nb: 0},
-            green: {nb: 0},
-            red: {nb: 0},
-            yellow: {nb: 0},
-            white: {nb: 0}
-          };
-        }
-        $scope.table.players[$scope.userIndex].token[tokenName].nb++;
+
       }
     };
 
     $scope.nextPlayer = function () {
+      //TODO do a merge
+      $scope.table.players[$scope.userIndex].token = angular.copy($scope.pickedToken);
       $scope.table.$save();
       $scope.pickedToken = angular.copy(CST_PICKED_TOKEN_INITIAL);
     }
