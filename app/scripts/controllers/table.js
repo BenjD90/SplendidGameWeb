@@ -16,7 +16,7 @@ angular.module('splendidGameWebApp')
 
     function initRound() {
       $scope.table = $firebaseObject(Ref.child('tables/' + $routeParams.idTable));
-      $scope.table.$loaded().then(function (ref) {
+      $scope.table.$loaded().then(function () {
         if (!$scope.table.players) {
           $scope.table.players = [];
         }
@@ -50,12 +50,11 @@ angular.module('splendidGameWebApp')
       }
     }
 
-
     //$window.onbeforeunload = function(event) {
     //  return CST_MESSAGES.quitGame;
     //};
 
-    $window.onunload = function (event) {
+    $window.onunload = function () {
       $scope.quitTable();
     };
 
@@ -73,7 +72,6 @@ angular.module('splendidGameWebApp')
       }
     });
 
-
     //take one token
     $scope.getOneToken = function (tokenName) {
       console.log($scope.pickedToken);
@@ -88,21 +86,20 @@ angular.module('splendidGameWebApp')
     };
 
     $scope.nextPlayer = function () {
-      //TODO do a merge
-      $scope.table.players[$scope.userIndex].token = angular.copy($scope.pickedToken);
+      $scope.table.players[$scope.userIndex].token = addTokens(angular.copy($scope.pickedToken), $scope.table.players[$scope.userIndex].token);
       $scope.table.$save();
       $scope.pickedToken = angular.copy(CST_PICKED_TOKEN_INITIAL);
-    }
+    };
 
     $scope.cancelAction = function () {
       initRound();
-    }
+    };
 
     $scope.quitTable = function () {
-      //TODO add rollback
       $scope.table.players.splice($scope.table.players.indexOf(user.uid), 1);
       $scope.table.$save();
-    }
+      //TODO change main player
+    };
 
     $scope.takeCard = function (card) {
       if ($scope.userIndex != -1) {
@@ -116,7 +113,22 @@ angular.module('splendidGameWebApp')
           $scope.getOneToken('yellow');
         }
       }
+    };
+
+    function addTokens(pickedTokens, userTokens) {
+      var ret = {};
+      angular.forEach(pickedTokens, function (value, key) {
+        ret[key] = {};
+        if (userTokens != undefined && userTokens[key] != undefined) {
+          ret[key].nb = value.nb + userTokens[key].nb;
+        } else {
+          ret[key].nb = value.nb;
+        }
+      }, ret);
+      debugger;
+      return ret;
     }
+
 
     function getIndexOfUser(users, userId) {
       for (var i = 0; i < users.length; i++) {
@@ -135,7 +147,7 @@ angular.module('splendidGameWebApp')
      * This action is only possible if there are at least 4 tokens of the chosen color left when the player takes them
      * @param pickedToken
      * @param tokenWanted
-     * @return return true if one can else false
+     * @return boolean true if one can else false
      */
     function controlTokenPicked(pickedToken, tokenWanted) {
       var properties = {
@@ -181,12 +193,9 @@ angular.module('splendidGameWebApp')
 
       //already picked one
       //Take 2 gem tokens of the same color.
-      if (properties.sumAllPickedToken > 0 && properties.maxPickedByColor < 2 && properties.numberOfDifferentsColors < 2 && properties.maxPickedByColorColor == tokenWanted && $scope.table.game.token[tokenWanted].nb > 2) {
-        return true;
-      }
+      return (properties.sumAllPickedToken > 0 && properties.maxPickedByColor < 2 && properties.numberOfDifferentsColors < 2 && properties.maxPickedByColorColor == tokenWanted && $scope.table.game.token[tokenWanted].nb > 2);
 
       return false;
     }
-  })
-;
+  });
 
