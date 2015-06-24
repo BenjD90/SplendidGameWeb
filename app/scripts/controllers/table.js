@@ -8,7 +8,7 @@
  * Controller of the splendidGameWebApp
  */
 angular.module('splendidGameWebApp')
-  .controller('TableCtrl', function ($scope, $routeParams, user, Auth, Ref, $firebaseObject, $location, $window, CST_MESSAGES, CST_PICKED_TOKEN_INITIAL) {
+  .controller('TableCtrl', function ($scope, $routeParams, user, Auth, Ref, $firebaseObject, $location, $window, CST_MESSAGES, CST_PICKED_TOKEN_INITIAL, gameService) {
 
     initRound();
 
@@ -17,37 +17,13 @@ angular.module('splendidGameWebApp')
     function initRound() {
       $scope.table = $firebaseObject(Ref.child('tables/' + $routeParams.idTable));
       $scope.table.$loaded().then(function () {
-        if (!$scope.table.players) {
-          $scope.table.players = [];
-        }
-        //if I'm new and the table is full
-        if (getIndexOfUser($scope.table.players, user.uid) == -1 && $scope.table.players.length >= $scope.nbPlayerMax) {
-          alert('Table pleine !');
-          return;
-        }
-
-        //if I'm new
-        if (getIndexOfUser($scope.table.players, user.uid) == -1) {
-          $scope.table.players.push({userId: user.uid});
-        }
-
-        //save the user index
-        $scope.userIndex = getIndexOfUser($scope.table.players, user.uid);
-
-        if (!$scope.table.game) {
-          $scope.table.game = {
-            token: ALL_GAME.tokens,
-            cards: ALL_GAME.cards
-          };
-        }
+        gameService.initGame($scope.table);
         $scope.table.$save();
       });
+    }
 
-      $scope.pickedToken = angular.copy(CST_PICKED_TOKEN_INITIAL);
-
-      $scope.getArrayOfSize = function (num) {
-        return new Array(num);
-      }
+    $scope.getArrayOfSize = function (num) {
+      return new Array(num);
     }
 
     //$window.onbeforeunload = function(event) {
@@ -130,14 +106,6 @@ angular.module('splendidGameWebApp')
     }
 
 
-    function getIndexOfUser(users, userId) {
-      for (var i = 0; i < users.length; i++) {
-        if (users[i].userId == userId) {
-          return i;
-        }
-      }
-      return -1;
-    }
 
     /**
      * Check if the user can take a token or not
